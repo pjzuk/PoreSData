@@ -1,0 +1,72 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.1.x                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      fvSchemes;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+ddtSchemes
+{
+    default         CrankNicolson 0.5;
+//    default         Euler;
+}
+
+gradSchemes
+{
+    default         none; 
+    grad(ePhi)      Gauss linear; 
+    grad(nPlus)     Gauss linear; 
+    grad(nMinus)    Gauss linear; 
+    grad(PhiGrad)   Gauss linear;
+}
+
+snGradSchemes
+{
+   default          none;
+   snGrad(ePhi)      corrected;
+}
+
+divSchemes
+{
+    default         none;
+    div(muPlusSnPhiGrad,nPlus) Gauss linear;
+    div(muMinusSnPhiGrad,nMinus) Gauss linear;
+}   
+
+laplacianSchemes
+{
+    default         none;
+    laplacian(ePhi)  Gauss linear corrected;
+    laplacian(DPlus,nPlus)  Gauss linear corrected;
+    laplacian(DMinus,nMinus)  Gauss linear corrected;
+}   
+    
+interpolationSchemes
+{
+    default         none;
+    interpolate(PhiGrad)        linear;
+    interpolate(nPlusGrad)      linear;
+    interpolate(nMinusGrad)     linear;
+    interpolate(nPlusCurrent)   linear;
+    interpolate(nMinusCurrent)  linear;
+    interpolate(nPlus)          linear;
+    interpolate(nMinus)         linear;
+}
+
+fluxRequired
+{
+    default         no;
+    p;
+}
+
+// ************************************************************************* //

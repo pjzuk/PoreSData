@@ -1,0 +1,107 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.1.x                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      fvSolution;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers
+{
+    ePhi
+    {
+
+        solver          PCG;
+        preconditioner  DIC;
+        tolerance       1e-32;
+        relTol          1e-32;
+	maxIter		2000;
+    }
+
+    nPlus
+    {
+
+        solver          PCG;
+        preconditioner  DILU;
+        tolerance       1e-25;
+        relTol          1e-25;
+	maxIter		2000;
+    }
+
+    nMinus
+    {
+        solver          PCG;
+        preconditioner  DILU;
+        tolerance       1e-25;
+        relTol          1e-25;
+	maxIter		2000;
+    }
+
+    phiFinal
+    {
+
+        solver          PCG;
+        preconditioner  DIC;
+        tolerance       0.0;
+        relTol          0.0;
+	
+	maxIter		2000;
+    }
+
+    nPlusFinal
+    {
+
+        solver          BICCG;
+	preconditioner	DILU;
+        tolerance       0.0;
+        relTol          0.0;
+
+	maxIter		2000;
+    }
+
+    nMinusFinal
+    {
+
+        solver          BICCG;
+	preconditioner	DILU;
+        tolerance       0.0;
+        relTol          0.0;
+
+	maxIter		2000;
+    }
+}
+
+
+relaxationFactors
+{
+    fields
+    {
+        ePhi            1.0;
+	nPlus           1.0;
+        nMinus          1.0;
+    }
+    equations
+    {
+        PhiEqn             1.0;
+        nPlusEqn           1.0;
+        nMinusEqn          1.0;
+    }
+}
+
+PISO
+{
+    nOuterCorrIons   1;
+    nCorrIons        3;
+}
+
+
+// *************************************************************************

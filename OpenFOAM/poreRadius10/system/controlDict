@@ -1,0 +1,65 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.0.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     SIMPLESolverBAK9;
+
+startFrom       latestTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         4e-2;//2.02e-3;
+
+deltaT          1e-7;
+
+maxDeltaT	1e-6;
+
+writeControl    adjustableRunTime;
+
+writeInterval   0.5e-3;
+
+purgeWrite      0;
+
+writeFormat     ascii;
+
+writePrecision  15;
+
+writeCompression uncompressed;
+
+timeFormat      general;
+
+timePrecision   10;
+
+runTimeModifiable true;
+
+adjustTimeStep  false;
+
+maxCo 0.45e-1;
+
+libs ( "libSternBC.so"
+       "libBakBC2.so" 
+       "libBakPressure2.so" );
+
+DebugSwitches
+{
+//    fvScalarMatrix      1;
+//    fvSchemes           1;
+//    fvVectorMatrix      1;
+}
+
+// ************************************************************************* //

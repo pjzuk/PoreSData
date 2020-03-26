@@ -1,0 +1,75 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.1.x                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      fvSchemes;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+ddtSchemes
+{
+    default         CrankNicolson 0.5;
+//    default         Euler;
+}
+
+gradSchemes
+{
+    default         none; 
+    grad(ePhi)      Gauss skewCorrected linear; 
+    grad(nPlus)     Gauss skewCorrected linear; 
+    grad(nMinus)    Gauss skewCorrected linear; 
+    grad(PhiGrad)   Gauss skewCorrected linear;
+    snGradCorr(ePhi) Gauss skewCorrected linear;
+    snGradCorr(nPlus) Gauss skewCorrected linear;
+    snGradCorr(nMinus) Gauss skewCorrected linear;
+}
+
+snGradSchemes
+{
+   default          none;
+   snGrad(ePhi)     corrected;
+}
+
+divSchemes
+{
+    default         none;
+    div(muPlusSnPhiGrad,nPlus) Gauss skewCorrected linear;
+    div(muMinusSnPhiGrad,nMinus) Gauss skewCorrected linear;
+}   
+
+laplacianSchemes
+{
+    default         none;
+    laplacian(ePhi)  Gauss skewCorrected linear corrected;
+    laplacian(DPlus,nPlus)  Gauss skewCorrected linear corrected;
+    laplacian(DMinus,nMinus)  Gauss skewCorrected linear corrected;
+}   
+    
+interpolationSchemes
+{
+    default         none;
+    interpolate(PhiGrad)        skewCorrected linear;
+    interpolate(nPlusGrad)      skewCorrected linear;
+    interpolate(nMinusGrad)     skewCorrected linear;
+    interpolate(nPlusCurrent)   skewCorrected linear;
+    interpolate(nMinusCurrent)  skewCorrected linear;
+    interpolate(nPlus)          skewCorrected linear;
+    interpolate(nMinus)         skewCorrected linear;
+}
+
+fluxRequired
+{
+    default         no;
+    p;
+}
+
+// ************************************************************************* //

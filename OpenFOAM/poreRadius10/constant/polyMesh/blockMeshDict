@@ -1,0 +1,251 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | foam-extend: Open Source CFD                    |
+|  \\    /   O peration     | Version:     3.2                                |
+|   \\  /    A nd           | Web:         http://www.foam-extend.org         |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// here all is divided by 20 in comparison to original
+
+convertToMeters 0.2e-06;
+
+x1   0;
+mx1 -50;
+x2   0.05; // 1
+mx2 -50.035355339059; //$mx1 - 0.70710678118
+x3   0.05;  // x2
+mx3 -50.05; // mx1 - mx3
+x4   0.05; // x2
+mx4 -50.0530330085885; // mx1 - 0.70710678118*1.5
+x5   0.075; // 1.5
+mx5 -50.075; // mx1 - 1.5
+x6   10; //10
+mx6 -75.15; // 75 + 3*x2
+
+y0 0;
+y1 0.035355339059; // 0.70710678118
+y2 0.05;           // 1
+y3 0.0530330085885; //=0.70710678118*1.5;
+y4 0.075;          // 1.5
+y5 0.1;             // 2
+
+z0  1;
+mz0 0.0;
+
+tFarH 1000;
+tFarV 10;
+tClose 50;
+nLong 10000;  //x*100
+nShort 20;   //x*pi/4
+
+lsA1x -50.046193976625565;  //$mx1 - 1*0.9238795325112867
+lsA1y   0.01913417161825449;  // 1*0.3826834323650898 
+lsA2x -50.01913417161825449;  //$mx1 - 1*0.3826834323650898 
+lsA2y   0.046193976625565;  // 1*0.9238795325112867
+llA1x -50.0692909649383466;    //$mx1 - 1.5*0.9238795325112867
+llA1y   0.02870125742738173;  // 1.5*0.3826834323650898 
+llA2x -50.02870125742738173;  //$mx1 - 1.5*0.3826834323650898 
+llA2y   0.0692909649383465;    // 1.5*0.9238795325112867
+rsA2x   0.035355339059;       //$x1 + 1*0.70710678118 
+rsA2y   0.064644660941;       //$y5 - 1*0.70710678118
+
+rAx     0.0176776695295;       //$x1 + 0.5*0.70710678118 
+rAy     0.08232233047049999;       //$y5 - 0.5*0.70710678118
+
+
+surfGrad 0.002;
+invSurfGrad 500;
+edgeGrad 2;
+invEdgeGrad 0.5;
+longGrad 3;
+farHGrad 0.02;
+
+vertices
+(
+    ($mx6 $y0  $mz0) // 0
+    ($mx5 $y0  $mz0) // 1
+    ($mx3 $y0  $mz0) // 2
+    ($x3  $y0  $mz0) // 3
+    ($x5  $y0  $mz0) // 4
+    ($x6  $y0  $mz0) // 5
+
+    ($mx2 $y1  $mz0) // 6
+    ($mx1 $y2  $mz0) // 7
+    ($x1  $y2  $mz0) // 8
+    ($x2  $y5  $mz0) // 9
+
+    ($mx6 $y3  $mz0) // 10
+    ($mx4 $y3  $mz0) // 11
+    ($mx1 $y4  $mz0) // 12
+    ($x1  $y4  $mz0) // 13
+    ($x4  $y3  $mz0) // 14
+    ($x6  $y3  $mz0) // 15
+
+    ($mx6 $y5  $mz0) // 16
+    ($mx4 $y5  $mz0) // 17
+    ($mx1 $y5  $mz0) // 18
+    ($x1  $y5  $mz0) // 19
+    ($x4  $y5  $mz0) // 20
+    ($x6  $y5  $mz0) // 21
+                           //+22
+    ($mx6 $y0  $z0 ) // 0  22
+    ($mx5 $y0  $z0 ) // 1  23
+    ($mx3 $y0  $z0 ) // 2  24
+    ($x3  $y0  $z0 ) // 3  25
+    ($x5  $y0  $z0 ) // 4  26
+    ($x6  $y0  $z0 ) // 5  27
+
+    ($mx2 $y1  $z0 ) // 6  28
+    ($mx1 $y2  $z0 ) // 7  29
+    ($x1  $y2  $z0 ) // 8  30
+    ($x2  $y5  $z0 ) // 9  31
+
+    ($mx6 $y3  $z0 ) // 10 32
+    ($mx4 $y3  $z0 ) // 11 33
+    ($mx1 $y4  $z0 ) // 12 34
+    ($x1  $y4  $z0 ) // 13 35
+    ($x4  $y3  $z0 ) // 14 36
+    ($x6  $y3  $z0 ) // 15 37
+
+    ($mx6 $y5  $z0 ) // 16 38
+    ($mx4 $y5  $z0 ) // 17 39
+    ($mx1 $y5  $z0 ) // 18 40
+    ($x1  $y5  $z0 ) // 19 41
+    ($x4  $y5  $z0 ) // 20 42
+    ($x6  $y5  $z0 ) // 21 43
+
+);
+
+blocks
+(
+    hex (0 1 11 10 22 23 33 32) ($tFarH $nShort 1) simpleGrading ($farHGrad 1 1)    // 0
+    hex (1 2 6 11 23 24 28 33)  ($tClose $nShort 1) simpleGrading ($surfGrad 1 1)         // 1
+    hex (6 7 12 11 28 29 34 33)  ($nShort $tClose 1) simpleGrading (1 $invSurfGrad 1)        // 2
+    hex (7 8 13 12 29 30 35 34)  ($nLong $tClose 1) simpleGrading ($longGrad $invSurfGrad 1)        // 3
+    hex (8 9 20 13 30 31 42 35)  ($tFarV $tClose 1) simpleGrading (1 $invSurfGrad 1)        // 4
+//    hex (3 4 14 9 25 26 36 31)  ($tClose $nShort 1) simpleGrading ($invSurfGrad 1 1)         // 5
+//    hex (4 5 15 14 26 27 37 36)  ($tFarH $nShort 1) simpleGrading (1 1 1)        // 6
+    hex (10 11 17 16 32 33 39 38)  ($tFarH $tFarV 1) simpleGrading ($farHGrad 1 1)      // 7
+    hex (11 12 18 17 33 34 40 39)  ($nShort $tFarV 1) simpleGrading (1 1 1)      // 8
+    hex (12 13 19 18 34 35 41 40)  ($nLong $tFarV 1) simpleGrading ($longGrad 1 1)      // 9
+    hex (13 20 19 19 35 42 41 41)  ($tFarV $tFarV 1) simpleGrading (1 1 1)      // 10
+//    hex (14 15 21 20 36 37 43 42)  ($tFarH $tFarV 1) simpleGrading (1 1 1)      // 11
+);
+
+edges
+(
+    arc 2 6   ($lsA1x $lsA1y $mz0)
+    arc 24 28 ($lsA1x $lsA1y $z0)
+    arc 6 7   ($lsA2x $lsA2y $mz0)
+    arc 28 29 ($lsA2x $lsA2y $z0)
+    arc 1 11  ($llA1x $llA1y $mz0)
+    arc 23 33 ($llA1x $llA1y $z0)
+    arc 11 12 ($llA2x $llA2y $mz0)
+    arc 33 34 ($llA2x $llA2y $z0)
+
+//    arc 3 9   ($rsA1x $rsA1y $mz0)
+//    arc 25 31 ($rsA1x $rsA1y $z0)
+    arc 8 9   ($rsA2x $rsA2y $mz0)
+    arc 30 31 ($rsA2x $rsA2y $z0)
+//    arc 4  14 ($rlA1x $rlA1y $mz0)
+//    arc 26 36 ($rlA1x $rlA1y $z0)
+//    arc 13 14 ($rlA2x $rlA2y $mz0)
+//    arc 35 36 ($rlA2x $rlA2y $z0)
+
+    arc 13 20 ($rAx $rAy $mz0)
+    arc 35 42 ($rAx $rAy $z0)
+);
+
+boundary
+(
+    symmetryLine
+    {
+        type patch;
+        faces
+        (
+            (17 16 38 39)
+            (18 17 39 40)
+            (19 18 40 41)
+            (20 19 41 42)
+            ( 9 20 42 31)
+//            (21 20 42 43)
+        );
+    }
+    left
+    {
+        type patch;
+        faces
+        (
+            (10 0 22 32)
+            (16 10 32 38)
+        );
+    }
+    reservoir
+    {
+        type patch;
+        faces
+        (
+            (0 1 23 22)
+            (1 2 24 23)
+        );
+    }
+    wall
+    {
+        type patch;
+        faces
+        (
+            (2 6 28 24)
+            (6 7 29 28)
+            (7 8 30 29)
+            (8 9 31 30)
+        );
+    }
+    bottom
+    {
+        type patch;
+        faces
+        (
+            ( 0 10 11  1)
+            ( 1 11  6  2)
+            ( 6 11 12  7)
+            ( 7 12 13  8)
+            ( 8 13 20  9)
+            (10 16 17 11)
+            (11 17 18 12)
+            (12 18 19 13)
+            (13 19 19 20)
+        );
+    }
+    top
+    {
+        type patch;
+        faces
+        (
+            (22 23 33 32)
+            (23 24 28 33)
+            (28 29 34 33)
+            (29 30 35 34)
+            (30 31 42 35)
+            (32 33 39 38)
+            (33 34 40 39)
+            (34 35 41 40)
+            (41 35 42 41)
+        );
+    }
+
+);
+
+mergePatchPairs
+(
+);
+
+// ************************************************************************* //

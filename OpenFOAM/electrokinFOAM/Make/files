@@ -1,0 +1,3 @@
+electrokinFOAM.C
+
+EXE = $(FOAM_APPBIN)/electrokinFOAM
