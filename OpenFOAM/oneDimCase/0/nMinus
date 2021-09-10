@@ -31,17 +31,17 @@ boundaryField
     plateOne
     {
         type            fixedFlux;
-	n		nMinus;
-	charge		-1;
-	D		1.91e-09;
-	mu		7.4379062e-08;
-	gradient	uniform 0.0;
-	value		calculated;
+	    n		        nMinus;
+	    charge		    -1;
+	    D		        1.91e-09;
+	    mu		        7.4379062e-08;
+	    gradient	    uniform 0.0;
+	    value		    calculated;
     }
     plateTwo
     {
         type            fixedValue;
-	value		uniform 1;
+     	value		    uniform 1;
     }
 }
 

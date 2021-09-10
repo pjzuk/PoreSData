@@ -51,9 +51,7 @@ adjustTimeStep  false;
 
 maxCo 0.45e-1;
 
-libs ( "libSternBC.so"
-       "libBakBC2.so" 
-       "libBakPressure2.so" );
+libs ( "electrokinBC.so" );
 
 DebugSwitches
 {

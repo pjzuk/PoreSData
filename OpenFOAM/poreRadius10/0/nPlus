@@ -35,7 +35,7 @@ boundaryField
     }
     wall
     {
-        type            fixedFluxBAK2;
+        type            fixedFlux;
 	n		nPlus;
 	charge		1;
 	D		1.337e-09;
