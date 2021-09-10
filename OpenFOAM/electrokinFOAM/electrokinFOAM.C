@@ -78,8 +78,6 @@ int main(int argc, char *argv[])
 	
     	    snPhiGrad = fvc::snGrad(ePhi) * mesh.magSf();
 
-            Info << "set up nPlus equation" << endl;
-
 	    muPlusSnPhiGrad = snPhiGrad*muPlus*ZPlus;   
 	    fvScalarMatrix nPlusEqn
             (

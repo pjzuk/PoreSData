@@ -39,7 +39,7 @@ Foam::fixedFluxFvPatchScalarField::fixedFluxFvPatchScalarField
     fixedGradientFvPatchScalarField(p, iF),
     nName_("n"),
     snPhiGradName_("snPhiGrad"),
-    sign_(1.0),
+    charge_(1.0),
     D_(1.0),
     mu_(100.0)
 {}
@@ -55,7 +55,7 @@ Foam::fixedFluxFvPatchScalarField::fixedFluxFvPatchScalarField
     fixedGradientFvPatchScalarField(ptf, p, iF, mapper),
     nName_(ptf.nName_),
     snPhiGradName_(ptf.snPhiGradName_),
-    sign_(ptf.sign_),
+    charge_(ptf.charge_),
     D_(ptf.D_),
     mu_(ptf.mu_)
 {}
@@ -70,7 +70,7 @@ Foam::fixedFluxFvPatchScalarField::fixedFluxFvPatchScalarField
     fixedGradientFvPatchScalarField(p, iF),    
     nName_(dict.lookup("n")),
     snPhiGradName_(dict.lookupOrDefault<word>("snPhiGrad", "snPhiGrad")),
-    sign_(readScalar(dict.lookup("sign"))),
+    charge_(readScalar(dict.lookup("charge"))),
     D_(readScalar(dict.lookup("D"))),
     mu_(readScalar(dict.lookup("mu")))
 {
@@ -95,7 +95,7 @@ Foam::fixedFluxFvPatchScalarField::fixedFluxFvPatchScalarField
     fixedGradientFvPatchScalarField(wbppsf),
     nName_(wbppsf.nName_),
     snPhiGradName_(wbppsf.snPhiGradName_),
-    sign_(wbppsf.sign_),
+    charge_(wbppsf.charge_),
     D_(wbppsf.D_),
     mu_(wbppsf.mu_)
 {}
@@ -109,7 +109,7 @@ Foam::fixedFluxFvPatchScalarField::fixedFluxFvPatchScalarField
     fixedGradientFvPatchScalarField(wbppsf, iF),
     nName_(wbppsf.nName_),
     snPhiGradName_(wbppsf.snPhiGradName_),
-    sign_(wbppsf.sign_),
+    charge_(wbppsf.charge_),
     D_(wbppsf.D_),
     mu_(wbppsf.mu_)
 {}
@@ -130,7 +130,7 @@ void Foam::fixedFluxFvPatchScalarField::updateCoeffs()
     const fvsPatchField<scalar>& snPhiGrad =
         patch().lookupPatchField<surfaceScalarField, scalar>(snPhiGradName_);
 
-    gradient() =  - sign_ * np * (mu_/ D_ ) * (snPhiGrad / patch().magSf()) ;
+    gradient() =  - charge_ * np * (mu_/ D_ ) * (snPhiGrad / patch().magSf()) ;
 
     fixedGradientFvPatchScalarField::updateCoeffs();
 
@@ -143,7 +143,7 @@ void Foam::fixedFluxFvPatchScalarField::write(Ostream& os) const
     writeEntry("value",os);
     writeEntryIfDifferent<word>(os, "snPhiGrad", "snPhiGrad", snPhiGradName_);
     os.writeKeyword("n") << nName_ << token::END_STATEMENT << nl;
-    os.writeKeyword("sign") << sign_ << token::END_STATEMENT << nl;
+    os.writeKeyword("charge") << charge_ << token::END_STATEMENT << nl;
     os.writeKeyword("D") << D_ << token::END_STATEMENT << nl;
     os.writeKeyword("mu") << mu_ << token::END_STATEMENT << nl;
     gradient().writeEntry("gradient", os);

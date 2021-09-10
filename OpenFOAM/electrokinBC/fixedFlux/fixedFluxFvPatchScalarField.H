@@ -32,7 +32,7 @@ Description
     {
         type            fixedFlux;     // BC type
         n               nMinus;        // name of the ion field that they will refer to
-        sign            -1;            // sing of the charge
+        charge          -1;            // singed charge of ion
         D               1.91e-09;      // diffusion coefficient of the ion
         mu              7.4379062e-08; // mobility coefficient od the ion
         value           calculated;
@@ -71,8 +71,8 @@ class fixedFluxFvPatchScalarField
         //- Name of the - Electric field flux
         word snPhiGradName_;
 
-        //- Valency of ions
-        scalar sign_;
+        //- charge of ions
+        scalar charge_;
 
 	//- diffusion coefficient
 	scalar D_;

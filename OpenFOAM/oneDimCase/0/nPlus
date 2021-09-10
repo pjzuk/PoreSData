@@ -32,7 +32,7 @@ boundaryField
     {
         type            fixedFlux;
 	n		nPlus;
-	sign		1;
+	charge		1;
 	D		1.337e-09;
 	mu		5.2065343e-08;
 	gradient	uniform 0.0;

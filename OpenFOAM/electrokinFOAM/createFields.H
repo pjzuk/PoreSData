@@ -244,7 +244,7 @@
             IOobject::NO_READ,
             IOobject::AUTO_WRITE
         ),
-        (- nPlusGrad*DPlus - nPlus*muPlus*PhiGrad)
+        (- nPlusGrad*DPlus - nPlus*ZPlus*muPlus*PhiGrad)
     );
 
     volVectorField nMinusCurrent
@@ -257,7 +257,7 @@
             IOobject::NO_READ,
             IOobject::AUTO_WRITE
         ),
-        (- nMinusGrad*DMinus + nMinus*muMinus*PhiGrad)
+        (- nMinusGrad*DMinus + nMinus*ZMinus*muMinus*PhiGrad)
     );
 
     Info << "Create fields nSnVelocity\n" << endl;
