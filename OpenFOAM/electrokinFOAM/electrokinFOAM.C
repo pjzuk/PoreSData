@@ -150,11 +150,11 @@ int main(int argc, char *argv[])
     	nMinusSnGrad = fvc::interpolate(nMinusGrad) & mesh.Sf();
         nPlusGrad = fvc::grad(nPlus);
     	nPlusSnGrad = fvc::interpolate(nPlusGrad) & mesh.Sf();
-	nPlusCurrent = - nPlusGrad*DPlus - nPlus*muPlus*PhiGrad;
-	nMinusCurrent = - nMinusGrad*DMinus + nMinus*muMinus*PhiGrad;
-	nPlusSnVelocity = - nPlusSnGrad*DPlus/max(mag(fvc::interpolate(nPlus)),nMinimals) - muPlusSnPhiGrad;
-	nMinusSnVelocity = - nMinusSnGrad*DMinus/max(mag(fvc::interpolate(nMinus)),nMinimals) +  muMinusSnPhiGrad;
-	netCharge = nRef*e*(nPlus*ZPlus-nMinus*ZMinus);
+	    nPlusCurrent = - nPlusGrad*DPlus - nPlus*ZPlus*muPlus*PhiGrad;
+	    nMinusCurrent = - nMinusGrad*DMinus + nMinus*ZMinus*muMinus*PhiGrad;
+	    nPlusSnVelocity = - nPlusSnGrad*DPlus/max(mag(fvc::interpolate(nPlus)),nMinimals) - muPlusSnPhiGrad;
+	    nMinusSnVelocity = - nMinusSnGrad*DMinus/max(mag(fvc::interpolate(nMinus)),nMinimals) +  muMinusSnPhiGrad;
+	    netCharge = nRef*e*(nPlus*ZPlus-nMinus*ZMinus);
         // --- end of other usefull fields calculations
 
         runTime.write();
